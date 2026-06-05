@@ -2,7 +2,7 @@ class Solution {
     public boolean search(int[] nums, int target) {
         int low = 0, high = nums.length-1;
 
-        while(low < high){
+        while(low <= high){
             int mid = low+(high-low)/2;
             if(target == nums[mid]) return true;
 
@@ -10,7 +10,7 @@ class Solution {
                 low++; high--;
             }
 
-            if(nums[low] <= nums[mid]){
+            else if(nums[low] <= nums[mid]){
                 if(target < nums[mid] && target >= nums[low]) high = mid-1;
                 else low = mid+1;
             }
