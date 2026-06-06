@@ -1,7 +1,4 @@
 class Solution {
-    public int help(int a, int b, int n){
-        return n-b;
-    }
     public int numberOfSubstrings(String s) {
         int n = s.length();
 
@@ -32,16 +29,17 @@ class Solution {
         int ans = 0;
         for(int i=0; i<n; i++){
             indA = a[i]; indB = b[i]; indC = c[i];
-            
+
             if(indA == -1 || indB==-1 || indC == -1) break;
+
             if(s.charAt(i) == 'a'){
-                ans += help(a[i], Math.max(b[i],c[i]), n);
+                ans += n - Math.max(b[i],c[i]);
             }
             else if(s.charAt(i) == 'b'){
-                ans += help(b[i], Math.max(a[i],c[i]), n);
+                ans += n - Math.max(a[i],c[i]);
             }
             else if(s.charAt(i) == 'c'){
-                ans += help(c[i], Math.max(b[i],a[i]), n);
+                ans += n - Math.max(b[i],a[i]);
             }
         }
         return ans;
