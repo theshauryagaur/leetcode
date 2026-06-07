@@ -16,43 +16,26 @@
 class Solution {
     public TreeNode createBinaryTree(int[][] descriptions) {
         
-        TreeNode[] set = new TreeNode[100001];
-        int[] children = new int[100001];
+        TreeNode[] node = new TreeNode[100001];
         TreeNode root = new TreeNode();
 
         for(int[] i : descriptions){
-            TreeNode node ;
-            TreeNode child ;
+            node[i[1]] = new TreeNode(i[1]);
+        }
 
-            if( set[i[0]] == null ){
-                node = new TreeNode(i[0]);
-                if(children[i[0]] != 1) children[i[0]] = -1;
+        for(int[] i : descriptions){
+
+            if(node[i[0]] == null){ // only root node will satisfy this condition
+                root = node[i[0]] = new TreeNode(i[0]);
             }
-            else node = set[i[0]];
-
-            if( set[i[1]] == null ){
-                child = new TreeNode(i[1]);
-            }
-            else child = set[i[1]];
-
-            children[i[1]] = 1;
 
             if(i[2] == 1){
-                node.left = child;
+                node[i[0]].left = node[i[1]];
             }
-            else node.right = child;
-
-            set[i[0]] = node;
-            set[i[1]] = child;
-
+            else node[i[0]].right = node[i[1]];
+            
         }
-
-        for(int i=1; i<=100000; i++){
-            if(children[i] == -1){
-                root = set[i];
-                break;
-            }
-        }
+         
         return root;
     }
 }
