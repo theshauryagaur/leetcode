@@ -21,12 +21,13 @@ class Solution {
         int n = pos.length;
         int l = pos[0];
         int placed = 1;
-        
+
         for(int i=1; i<n; i++){
             if(pos[i]-l >= dis){
                 placed++;
                 l = pos[i];
             }
+            if(placed == m) return true;
         }
 
         return placed >= m ? true : false;
