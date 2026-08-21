@@ -1,22 +1,13 @@
 class Solution {
     public int rangeBitwiseAnd(int left, int right) {
-        int diff = right-left;
+        int shift = 0;
 
-        int max = Integer.highestOneBit(left);
-        int high = 31 - Integer.numberOfLeadingZeros(left);
-        
-        int ans = 0;
-        while(high >= 0){
-            int one = (right & max);
-            int two = (left & max);
-            if( (one == two) && diff < max){
-                ans += one == 0 ? 0 :max;
-                max >>= 1;
-                high--;
-            }
-            else break;
-
+        while (left != right) {
+            left >>= 1;
+            right >>= 1;
+            shift++;
         }
-        return ans;
+
+        return left << shift;
     }
 }
