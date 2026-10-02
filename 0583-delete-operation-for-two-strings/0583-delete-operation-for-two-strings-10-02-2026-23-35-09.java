@@ -1,0 +1,28 @@
+class Solution {
+    int m, n;
+    int[][] dp;
+    public int help(String s1, String s2, int i, int j){
+        if(i == m || j == n) return 0;
+
+        if(dp[i][j] != -1) return dp[i][j];
+
+        if(s1.charAt(i) == s2.charAt(j)){
+            return dp[i][j] = 1 + help(s1, s2, i+1, j+1);
+        }
+        
+        return dp[i][j] = Math.max(help(s1, s2, i+1, j), help(s1, s2, i, j+1));
+
+    }
+    public int minDistance(String word1, String word2) {
+        m = word1.length();
+        n = word2.length();
+
+        dp = new int[m][n];
+
+        for(int i=0; i<m; i++){
+            Arrays.fill(dp[i], -1);
+        }
+        int x = help(word1, word2, 0, 0);
+        return m+n-2*x; // x = length of lcs in both string, other characters should be deleted
+    }
+}
